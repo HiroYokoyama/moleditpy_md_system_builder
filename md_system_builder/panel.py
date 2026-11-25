@@ -658,6 +658,7 @@ class BuilderPanel(QWidget):
         self.solute_cutoff = _spin(0.5, 10, 2.4, step=0.1, suffix=" A")
         sform.addRow("Remove solvent within:", self.solute_cutoff)
         layout.addWidget(sbox)
+        self.solvent_mode.currentIndexChanged.connect(self._solvent_mode_changed)
 
         ibox = QGroupBox("Ions (water only)")
         iform = QFormLayout(ibox)
@@ -674,11 +675,20 @@ class BuilderPanel(QWidget):
         self.solv_seed = _ispin(0, 2_147_483_647, 12345)
         iform.addRow("Seed:", self.solv_seed)
         layout.addWidget(ibox)
+        self.ion_box = ibox
+        self._solvent_mode_changed()
         run = QPushButton("Solvate")
         run.clicked.connect(self.run_solvate)
         layout.addWidget(run)
         layout.addStretch(1)
         return page
+
+    def _solvent_mode_changed(self, *_args):
+        water = self.solvent_mode.currentText() == SOLVENT_WATER
+        for widget in (self.solvent_smiles, self.solvent_name, self.solvent_density):
+            widget.setEnabled(not water)
+        if hasattr(self, "ion_box"):
+            self.ion_box.setEnabled(water)
 
     def run_solvate(self):
         mol = self.current_mol()

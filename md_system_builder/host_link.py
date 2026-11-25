@@ -178,6 +178,14 @@ class CellKeeper:
         else:
             top[STATE_KEY] = value
         self._last_mol = self._current_mol()
+        self._notify()
+
+    def _notify(self) -> None:
+        for listener in list(self.listeners):
+            try:
+                listener()
+            except Exception:
+                logger.debug("Cell listener failed", exc_info=True)
 
     def sync(self) -> None:
         """Runs after each host render (and on demand)."""
@@ -189,11 +197,7 @@ class CellKeeper:
             if mol is not None and not mol.HasProp(PROP):
                 self._restore_cell(mol)
             self._tag_top_state(mol)
-            for listener in list(self.listeners):
-                try:
-                    listener()
-                except Exception as exc:  # noqa: BLE001
-                    logger.debug("Cell listener failed: %s", exc)
+            self._notify()
         self.draw_overlay()
 
     def _restore_cell(self, mol) -> None:
