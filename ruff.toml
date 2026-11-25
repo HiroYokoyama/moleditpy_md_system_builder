@@ -1,0 +1,10 @@
+# Common tool copies and the modules materialized from the _periodic_shared submodule
+# are validated and formatted only in their canonical repositories.
+extend-exclude = [
+    "scripts/materialize_shared.py",
+    "scripts/release_common.py",
+    "tests/plugin_api_checker.py",
+    "md_system_builder/cell_model.py",
+    "md_system_builder/cell_preview.py",
+    "md_system_builder/elements.py",
+]

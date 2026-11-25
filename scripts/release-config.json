@@ -1,0 +1,19 @@
+{
+  "source": "md_system_builder/__init__.py",
+  "title": "MD System Builder",
+  "package": "md_system_builder",
+  "archive": "md_system_builder_{version}.zip",
+  "assets": [
+    "md_system_builder_{version}.zip"
+  ],
+  "include": [
+    "README.md",
+    "LICENSE",
+    "COPYING",
+    "LICENSING.md"
+  ],
+  "exclude": [
+    "*/__pycache__/*",
+    "*/.git/*"
+  ]
+}

@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+md_system_builder/settings.json
+
+# Materialized from the _periodic_shared submodule by scripts/materialize_shared.py
+# -- never commit these, they are generated at build/test time.
+md_system_builder/cell_model.py
+md_system_builder/cell_preview.py
+md_system_builder/elements.py
