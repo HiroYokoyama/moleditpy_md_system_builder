@@ -19,10 +19,11 @@ From a drawn molecule to ready-to-run GROMACS, LAMMPS or OpenMM input, inside Mo
 MD System Builder is the first of four plugins that do this; each installs from the Plugin
 Installer and needs nothing beyond MoleditPy itself.
 
-**Tutorial with screenshots**:
-[acetate in water, from drawing to a GROMACS run](https://github.com/HiroYokoyama/moleditpy_md_system_builder/blob/main/docs/tutorial_acetate_in_water.md)
-walks through every step below with a real example, including the run and the analysis
-of the trajectory.
+**Tutorial with screenshots**: acetate in water, from drawing to a GROMACS run, walks
+through every step below with a real example, including the run and the analysis of the
+trajectory. Read it on the
+[web page](https://hiroyokoyama.github.io/moleditpy_md_system_builder/docs/tutorial_acetate_in_water.html)
+or [on GitHub](https://github.com/HiroYokoyama/moleditpy_md_system_builder/blob/main/docs/tutorial_acetate_in_water.md).
 
 ```
   draw or open the solute
