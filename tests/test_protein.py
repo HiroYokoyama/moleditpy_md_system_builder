@@ -72,6 +72,7 @@ def test_hydrogens_charges_and_disulfide(peptide):
         length = np.linalg.norm(out.xyz[k] - out.xyz[partners[0]])
         assert 0.95 < length < 1.12
     assert out.n_molecules == 1
+    assert out.residue_counts() == [("protein", 1)]
 
 
 def test_amide_hydrogen_is_in_the_peptide_plane(peptide):

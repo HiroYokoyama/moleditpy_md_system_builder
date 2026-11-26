@@ -114,6 +114,8 @@ class System:
         runs: list[tuple[str, int]] = []
         for atoms in self.molecules():
             name = self.resnames[int(atoms[0])]
+            if name in _AMINO_ACIDS and len({int(self.resnums[k]) for k in atoms}) > 1:
+                name = "protein"
             if runs and runs[-1][0] == name:
                 runs[-1] = (name, runs[-1][1] + 1)
             else:
