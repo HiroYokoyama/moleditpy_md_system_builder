@@ -231,4 +231,12 @@ _PROTEIN = {
     "HIE",
     "HIP",
     "CYX",
+    "ASH",
+    "GLH",
+    "LYN",
+    "CYM",
+    "HYP",
+    "NHE",
+    "ACE",
+    "NME",
 }

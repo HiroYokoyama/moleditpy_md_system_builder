@@ -357,6 +357,12 @@ _AMINO_ACIDS = {
     "CYX",
     "ACE",
     "NME",
+    "ASH",
+    "GLH",
+    "LYN",
+    "CYM",
+    "HYP",
+    "NHE",
 }
 
 
