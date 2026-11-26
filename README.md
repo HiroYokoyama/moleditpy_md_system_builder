@@ -36,14 +36,21 @@ Installer and needs nothing beyond MoleditPy itself.
 
 ### Plugins to install
 
-| | Plugin | Menu | Role |
-|---|---|---|---|
-| **Required** | **MD System Builder** (this plugin) | Tools > MD System Builder... | periodic cell, packing, solvation with ions |
-| **Required** | [Large System Viewer](https://github.com/HiroYokoyama/moleditpy_large_system_viewer) | opens by itself for large structures | displays the built system |
-| **Required** | [Force Field Builder](https://github.com/HiroYokoyama/moleditpy_force_field_builder) | Tools > Force Field Builder... | force-field parameters and charges (`*.mdff.json`) |
-| One of | [GROMACS Input Generator](https://github.com/HiroYokoyama/moleditpy_gromacs_input_generator) | File > Export > GROMACS Input (.gro/.top/.mdp)... | `conf.gro`, `topol.top` and `.itp`, `em/nvt/npt/md.mdp`, `index.ndx`, `run.sh` / `run.bat` |
-| One of | [LAMMPS Input Generator](https://github.com/HiroYokoyama/moleditpy_lammps_input_generator) | File > Export > LAMMPS Input (data + in script)... | data file and `in.*` script |
-| One of | [OpenMM Script Generator](https://github.com/HiroYokoyama/moleditpy_openmm_script_generator) | File > Export > OpenMM Script... | `run_<name>.py`, PDB with the box, ForceField XML |
+**Required**
+
+| Plugin | Menu | Role |
+|---|---|---|
+| **MD System Builder** (this plugin) | Tools > MD System Builder... | periodic cell, packing, solvation with ions |
+| [Large System Viewer](https://github.com/HiroYokoyama/moleditpy_large_system_viewer) | opens by itself for large structures | displays the built system |
+| [Force Field Builder](https://github.com/HiroYokoyama/moleditpy_force_field_builder) | Tools > Force Field Builder... | force-field parameters and charges (`*.mdff.json`) |
+
+**One per MD engine**
+
+| Plugin | Menu | Writes |
+|---|---|---|
+| [GROMACS Input Generator](https://github.com/HiroYokoyama/moleditpy_gromacs_input_generator) | File > Export > GROMACS Input (.gro/.top/.mdp)... | `conf.gro`, `topol.top` and `.itp`, `em/nvt/npt/md.mdp`, `index.ndx`, `run.sh` / `run.bat` |
+| [LAMMPS Input Generator](https://github.com/HiroYokoyama/moleditpy_lammps_input_generator) | File > Export > LAMMPS Input (data + in script)... | data file and `in.*` script |
+| [OpenMM Script Generator](https://github.com/HiroYokoyama/moleditpy_openmm_script_generator) | File > Export > OpenMM Script... | `run_<name>.py`, PDB with the box, ForceField XML |
 
 **Why the Large System Viewer is required.** A solvated box reaches thousands to hundreds
 of thousands of atoms within one click, far more than MoleditPy's standard 3D styles are
