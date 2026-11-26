@@ -1,0 +1,355 @@
+=== em ===
+                      :-) GROMACS - gmx grompp, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx grompp -f em.mdp -c conf.gro -p topol.top -o em.tpr -n index.ndx -maxwarn 0
+
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group rest is 6615.00
+The integrator does not provide a ensemble temperature, there is no system ensemble temperature
+
+GROMACS reminds you: "If it's all right with Dirac, it's all right with me." (Enrico Fermi, on being told that there was experimental evidence He-3 nuclei obey Fermi-Dirac statistics.)
+
+Setting the LD random seed to 1831792617
+
+Generated 36 of the 36 non-bonded parameter combinations
+
+Generated 36 of the 36 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'MOL'
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+Excluding 3 bonded neighbours molecule type 'NA'
+
+Excluding 3 bonded neighbours molecule type 'CL'
+
+The largest distance between excluded atoms is 0.326 nm between atom 4 and 6
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 28x28x28, spacing 0.116 0.116 0.116
+
+Estimate for the relative computational load of the PME mesh part: 0.30
+
+This run will generate roughly 1 Mb of data
+                      :-) GROMACS - gmx mdrun, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx mdrun -deffnm em
+
+Reading file em.tpr, VERSION 2025.3 (single precision)
+1 GPU selected for this run.
+Mapping of GPU IDs to the 1 GPU task in the 1 rank on this node:
+  PP:0
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PP task will update and constrain coordinates on the CPU
+Using 1 MPI thread
+Using 32 OpenMP threads 
+
+
+Steepest Descents:
+   Tolerance (Fmax)   =  1.00000e+03
+   Number of steps    =        50000
+
+writing lowest energy coordinates.
+
+Steepest Descents converged to Fmax < 1000 in 173 steps
+Potential Energy  = -4.9685992e+04
+Maximum force     =  7.5702197e+02 on atom 2
+Norm of force     =  5.9372819e+01
+
+GROMACS reminds you: "I was detained, I was restrained" (The Smiths)
+
+=== nvt ===
+                      :-) GROMACS - gmx grompp, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx grompp -f nvt.mdp -c em.gro -p topol.top -o nvt.tpr -n index.ndx -maxwarn 0
+
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group System is 6612.00
+
+GROMACS reminds you: "I was detained, I was restrained" (The Smiths)
+
+Setting the LD random seed to -169877801
+
+Generated 36 of the 36 non-bonded parameter combinations
+
+Generated 36 of the 36 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'MOL'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'NA'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'CL'
+
+turning H bonds into constraints...
+
+Setting gen_seed to -159744034
+
+Velocities were taken from a Maxwell distribution at 300 K
+
+The largest distance between excluded atoms is 0.330 nm between atom 4 and 6
+
+Determining Verlet buffer for a tolerance of 0.005 kJ/mol/ps at 300 K
+
+Calculated rlist for 1x1 atom pair-list as 1.035 nm, buffer size 0.035 nm
+
+Set rlist, assuming 4x4 atom pair-list, to 1.000 nm, buffer size 0.000 nm
+
+Note that mdrun will redetermine rlist based on the actual pair-list setup
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 28x28x28, spacing 0.116 0.116 0.116
+
+Estimate for the relative computational load of the PME mesh part: 0.33
+
+This run will generate roughly 1 Mb of data
+                      :-) GROMACS - gmx mdrun, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx mdrun -deffnm nvt
+
+Reading file nvt.tpr, VERSION 2025.3 (single precision)
+Changing nstlist from 10 to 100, rlist from 1 to 1.162
+
+Update groups can not be used for this system because atoms that are (in)directly constrained together are interdispersed with other atoms
+
+1 GPU selected for this run.
+Mapping of GPU IDs to the 2 GPU tasks in the 1 rank on this node:
+  PP:0,PME:0
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PP task will update and constrain coordinates on the GPU
+PME tasks will do all aspects on the GPU
+Using 1 MPI thread
+Using 16 OpenMP threads 
+
+starting mdrun 'MoleditPy system'
+50000 steps,    100.0 ps.
+
+Writing final coordinates.
+
+               Core t (s)   Wall t (s)        (%)
+       Time:       59.877        3.743     1599.8
+                 (ns/day)    (hour/ns)
+Performance:     2308.566        0.010
+
+GROMACS reminds you: "Your daddy ain't your daddy but your daddy don't know" (Dalahan)
+
+=== npt ===
+                      :-) GROMACS - gmx grompp, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx grompp -f npt.mdp -c nvt.gro -p topol.top -o npt.tpr -t nvt.cpt -n index.ndx -maxwarn 0
+
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group System is 6612.00
+
+Last frame         -1 time  100.000   
+
+GROMACS reminds you: "Your daddy ain't your daddy but your daddy don't know" (Dalahan)
+
+Setting the LD random seed to -134289580
+
+Generated 36 of the 36 non-bonded parameter combinations
+
+Generated 36 of the 36 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'MOL'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'NA'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'CL'
+
+turning H bonds into constraints...
+
+Taking velocities from 'nvt.gro'
+
+The largest distance between excluded atoms is 0.324 nm between atom 4 and 7
+
+Determining Verlet buffer for a tolerance of 0.005 kJ/mol/ps at 300 K
+
+Calculated rlist for 1x1 atom pair-list as 1.035 nm, buffer size 0.035 nm
+
+Set rlist, assuming 4x4 atom pair-list, to 1.000 nm, buffer size 0.000 nm
+
+Note that mdrun will redetermine rlist based on the actual pair-list setup
+
+Reading Coordinates, Velocities and Box size from old trajectory
+
+Will read whole trajectory
+
+Using frame at t = 100 ps
+
+Starting time for run is 0 ps
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 28x28x28, spacing 0.116 0.116 0.116
+
+Estimate for the relative computational load of the PME mesh part: 0.33
+
+This run will generate roughly 1 Mb of data
+                      :-) GROMACS - gmx mdrun, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx mdrun -deffnm npt
+
+Reading file npt.tpr, VERSION 2025.3 (single precision)
+Changing nstlist from 10 to 100, rlist from 1 to 1.162
+
+Update groups can not be used for this system because atoms that are (in)directly constrained together are interdispersed with other atoms
+
+1 GPU selected for this run.
+Mapping of GPU IDs to the 2 GPU tasks in the 1 rank on this node:
+  PP:0,PME:0
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PP task will update and constrain coordinates on the GPU
+PME tasks will do all aspects on the GPU
+Using 1 MPI thread
+Using 16 OpenMP threads 
+
+starting mdrun 'MoleditPy system'
+50000 steps,    100.0 ps.
+
+Writing final coordinates.
+
+               Core t (s)   Wall t (s)        (%)
+       Time:       59.722        3.733     1599.9
+                 (ns/day)    (hour/ns)
+Performance:     2314.602        0.010
+
+GROMACS reminds you: "The best way to obtain plausible negative examples is to run a docking program with a biophysics-based function." (Julie Bernauer)
+
+=== md ===
+                      :-) GROMACS - gmx grompp, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx grompp -f md.mdp -c npt.gro -p topol.top -o md.tpr -t npt.cpt -n index.ndx -maxwarn 0
+
+Generating 1-4 interactions: fudge = 0.5
+Number of degrees of freedom in T-Coupling group System is 6612.00
+
+Last frame         -1 time  100.000   
+
+GROMACS reminds you: "The best way to obtain plausible negative examples is to run a docking program with a biophysics-based function." (Julie Bernauer)
+
+Setting the LD random seed to -10551905
+
+Generated 36 of the 36 non-bonded parameter combinations
+
+Generated 36 of the 36 1-4 parameter combinations
+
+Excluding 3 bonded neighbours molecule type 'MOL'
+
+turning H bonds into constraints...
+
+Excluding 2 bonded neighbours molecule type 'SOL'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'NA'
+
+turning H bonds into constraints...
+
+Excluding 3 bonded neighbours molecule type 'CL'
+
+turning H bonds into constraints...
+
+Taking velocities from 'npt.gro'
+
+The largest distance between excluded atoms is 0.321 nm between atom 4 and 6
+
+Determining Verlet buffer for a tolerance of 0.005 kJ/mol/ps at 300 K
+
+Calculated rlist for 1x1 atom pair-list as 1.036 nm, buffer size 0.036 nm
+
+Set rlist, assuming 4x4 atom pair-list, to 1.000 nm, buffer size 0.000 nm
+
+Note that mdrun will redetermine rlist based on the actual pair-list setup
+
+Reading Coordinates, Velocities and Box size from old trajectory
+
+Will read whole trajectory
+
+Using frame at t = 100 ps
+
+Starting time for run is 0 ps
+Calculating fourier grid dimensions for X Y Z
+Using a fourier grid of 28x28x28, spacing 0.114 0.114 0.114
+
+Estimate for the relative computational load of the PME mesh part: 0.32
+
+This run will generate roughly 4 Mb of data
+                      :-) GROMACS - gmx mdrun, 2025.3 (-:
+
+Executable:   /opt/gromacs-2025.3/bin/gmx
+Data prefix:  /opt/gromacs-2025.3
+Working dir:  ~/md_tutorial
+Command line:
+  gmx mdrun -deffnm md
+
+Reading file md.tpr, VERSION 2025.3 (single precision)
+Changing nstlist from 10 to 100, rlist from 1 to 1.165
+
+Update groups can not be used for this system because atoms that are (in)directly constrained together are interdispersed with other atoms
+
+1 GPU selected for this run.
+Mapping of GPU IDs to the 2 GPU tasks in the 1 rank on this node:
+  PP:0,PME:0
+PP tasks will do (non-perturbed) short-ranged interactions on the GPU
+PP task will update and constrain coordinates on the GPU
+PME tasks will do all aspects on the GPU
+Using 1 MPI thread
+Using 16 OpenMP threads 
+
+starting mdrun 'MoleditPy system'
+500000 steps,   1000.0 ps.
+
+Writing final coordinates.
+
+               Core t (s)   Wall t (s)        (%)
+       Time:      618.081       38.634     1599.8
+                 (ns/day)    (hour/ns)
+Performance:     2236.348        0.011
+
+GROMACS reminds you: "What is a Unix or Linux sysadmin's favourite hangout place? Foo Bar." (Anonymous)
+
+All stages finished.
+
+real	0m52.697s
+user	13m7.439s
+sys	0m3.055s

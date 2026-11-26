@@ -1,0 +1,583 @@
+{
+ "format": "moleditpy-mdff",
+ "version": 1,
+ "source": "MoleditPy Force Field Builder 0.1.4: OpenFF Sage 2.3.0 (built-in SMIRNOFF engine)",
+ "combination_rule": 2,
+ "fudge_lj": 0.5,
+ "fudge_qq": 0.833333,
+ "molecule_types": [
+  {
+   "name": "MOL",
+   "atoms": [
+    {
+     "name": "C1",
+     "element": "C",
+     "type": "C_n16",
+     "charge": -0.106,
+     "mass": 12.011,
+     "sigma": 0.3387971073428982,
+     "epsilon": 0.5044644278506009
+    },
+    {
+     "name": "C2",
+     "element": "C",
+     "type": "C_n14",
+     "charge": 0.9060000000000001,
+     "mass": 12.011,
+     "sigma": 0.348903243698854,
+     "epsilon": 0.43228491513144485
+    },
+    {
+     "name": "O1",
+     "element": "O",
+     "type": "O_n17",
+     "charge": -0.9,
+     "mass": 15.999,
+     "sigma": 0.30324958092817655,
+     "epsilon": 0.9395611736136456
+    },
+    {
+     "name": "O2",
+     "element": "O",
+     "type": "O_n17",
+     "charge": -0.9,
+     "mass": 15.999,
+     "sigma": 0.30324958092817655,
+     "epsilon": 0.9395611736136456
+    },
+    {
+     "name": "H1",
+     "element": "H",
+     "type": "H_n2",
+     "charge": 0.0,
+     "mass": 1.008,
+     "sigma": 0.2663934101837758,
+     "epsilon": 0.0559245203811804
+    },
+    {
+     "name": "H2",
+     "element": "H",
+     "type": "H_n2",
+     "charge": 0.0,
+     "mass": 1.008,
+     "sigma": 0.2663934101837758,
+     "epsilon": 0.0559245203811804
+    },
+    {
+     "name": "H3",
+     "element": "H",
+     "type": "H_n2",
+     "charge": 0.0,
+     "mass": 1.008,
+     "sigma": 0.2663934101837758,
+     "epsilon": 0.0559245203811804
+    }
+   ],
+   "bonds": [
+    {
+     "i": 0,
+     "j": 1,
+     "r0": 0.15123426121800002,
+     "k": 200143.3286579231,
+     "id": "b3"
+    },
+    {
+     "i": 0,
+     "j": 4,
+     "r0": 0.10924458091080001,
+     "k": 284832.68049741635,
+     "id": "b84"
+    },
+    {
+     "i": 0,
+     "j": 5,
+     "r0": 0.10924458091080001,
+     "k": 284832.68049741635,
+     "id": "b84"
+    },
+    {
+     "i": 0,
+     "j": 6,
+     "r0": 0.10924458091080001,
+     "k": 284832.68049741635,
+     "id": "b84"
+    },
+    {
+     "i": 1,
+     "j": 2,
+     "r0": 0.1258310564381,
+     "k": 477685.27176828234,
+     "id": "b22"
+    },
+    {
+     "i": 1,
+     "j": 3,
+     "r0": 0.1258310564381,
+     "k": 477685.27176828234,
+     "id": "b22"
+    }
+   ],
+   "angles": [
+    {
+     "i": 0,
+     "j": 1,
+     "k_atom": 2,
+     "theta0": 122.8898178748,
+     "k": 411.40592596611515,
+     "id": "a10"
+    },
+    {
+     "i": 0,
+     "j": 1,
+     "k_atom": 3,
+     "theta0": 122.8898178748,
+     "k": 411.40592596611515,
+     "id": "a10"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "k_atom": 4,
+     "theta0": 109.6505556522,
+     "k": 417.1119631909894,
+     "id": "a1"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "k_atom": 5,
+     "theta0": 109.6505556522,
+     "k": 417.1119631909894,
+     "id": "a1"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "k_atom": 6,
+     "theta0": 109.6505556522,
+     "k": 417.1119631909894,
+     "id": "a1"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 3,
+     "theta0": 129.41476105708793,
+     "k": 475.182894506168,
+     "id": "a15a"
+    },
+    {
+     "i": 4,
+     "j": 0,
+     "k_atom": 5,
+     "theta0": 108.0050010884,
+     "k": 164.98310955456407,
+     "id": "a2"
+    },
+    {
+     "i": 4,
+     "j": 0,
+     "k_atom": 6,
+     "theta0": 108.0050010884,
+     "k": 164.98310955456407,
+     "id": "a2"
+    },
+    {
+     "i": 5,
+     "j": 0,
+     "k_atom": 6,
+     "theta0": 108.0050010884,
+     "k": 164.98310955456407,
+     "id": "a2"
+    }
+   ],
+   "torsions": [
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 4,
+     "periodicity": 1,
+     "phase": 0.0,
+     "k": -2.9858263193020163,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 4,
+     "periodicity": 2,
+     "phase": 0.0,
+     "k": -1.1596051886640089,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 4,
+     "periodicity": 3,
+     "phase": 180.0,
+     "k": 1.7521923557394472,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 5,
+     "periodicity": 1,
+     "phase": 0.0,
+     "k": -2.9858263193020163,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 5,
+     "periodicity": 2,
+     "phase": 0.0,
+     "k": -1.1596051886640089,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 5,
+     "periodicity": 3,
+     "phase": 180.0,
+     "k": 1.7521923557394472,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 6,
+     "periodicity": 1,
+     "phase": 0.0,
+     "k": -2.9858263193020163,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 6,
+     "periodicity": 2,
+     "phase": 0.0,
+     "k": -1.1596051886640089,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 2,
+     "j": 1,
+     "k_atom": 0,
+     "l": 6,
+     "periodicity": 3,
+     "phase": 180.0,
+     "k": 1.7521923557394472,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 4,
+     "periodicity": 1,
+     "phase": 0.0,
+     "k": -2.9858263193020163,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 4,
+     "periodicity": 2,
+     "phase": 0.0,
+     "k": -1.1596051886640089,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 4,
+     "periodicity": 3,
+     "phase": 180.0,
+     "k": 1.7521923557394472,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 5,
+     "periodicity": 1,
+     "phase": 0.0,
+     "k": -2.9858263193020163,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 5,
+     "periodicity": 2,
+     "phase": 0.0,
+     "k": -1.1596051886640089,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 5,
+     "periodicity": 3,
+     "phase": 180.0,
+     "k": 1.7521923557394472,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 6,
+     "periodicity": 1,
+     "phase": 0.0,
+     "k": -2.9858263193020163,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 6,
+     "periodicity": 2,
+     "phase": 0.0,
+     "k": -1.1596051886640089,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "k_atom": 0,
+     "l": 6,
+     "periodicity": 3,
+     "phase": 180.0,
+     "k": 1.7521923557394472,
+     "improper": false,
+     "id": "t19a"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "k_atom": 2,
+     "l": 3,
+     "periodicity": 2,
+     "phase": 180.0,
+     "k": 21.59736607604576,
+     "improper": true,
+     "id": "i2"
+    },
+    {
+     "i": 1,
+     "j": 2,
+     "k_atom": 3,
+     "l": 0,
+     "periodicity": 2,
+     "phase": 180.0,
+     "k": 21.59736607604576,
+     "improper": true,
+     "id": "i2"
+    },
+    {
+     "i": 1,
+     "j": 3,
+     "k_atom": 0,
+     "l": 2,
+     "periodicity": 2,
+     "phase": 180.0,
+     "k": 21.59736607604576,
+     "improper": true,
+     "id": "i2"
+    }
+   ],
+   "exclusions_nrexcl": 3,
+   "force_field": "OpenFF Sage 2.3.0 (built-in SMIRNOFF engine)",
+   "constraints": [
+    {
+     "i": 0,
+     "j": 4,
+     "r0": 0.10924458091080001
+    },
+    {
+     "i": 0,
+     "j": 5,
+     "r0": 0.10924458091080001
+    },
+    {
+     "i": 0,
+     "j": 6,
+     "r0": 0.10924458091080001
+    }
+   ],
+   "charge_method": "MMFF94",
+   "charges_from_force_field": false,
+   "smiles": "CC(=O)[O-]"
+  },
+  {
+   "name": "SOL",
+   "atoms": [
+    {
+     "name": "OW",
+     "element": "O",
+     "type": "OW_TIP3P",
+     "charge": -0.834,
+     "mass": 15.9994,
+     "sigma": 0.315061,
+     "epsilon": 0.636386
+    },
+    {
+     "name": "HW1",
+     "element": "H",
+     "type": "HW_TIP3P",
+     "charge": 0.417,
+     "mass": 1.008,
+     "sigma": 0.0,
+     "epsilon": 0.0
+    },
+    {
+     "name": "HW2",
+     "element": "H",
+     "type": "HW_TIP3P",
+     "charge": 0.417,
+     "mass": 1.008,
+     "sigma": 0.0,
+     "epsilon": 0.0
+    }
+   ],
+   "bonds": [
+    {
+     "i": 0,
+     "j": 1,
+     "r0": 0.09572,
+     "k": 345000.0
+    },
+    {
+     "i": 0,
+     "j": 2,
+     "r0": 0.09572,
+     "k": 345000.0
+    }
+   ],
+   "angles": [
+    {
+     "i": 1,
+     "j": 0,
+     "k_atom": 2,
+     "theta0": 104.52,
+     "k": 383.0
+    }
+   ],
+   "torsions": [],
+   "exclusions_nrexcl": 2,
+   "settles": {
+    "i": 0,
+    "doh": 0.09572,
+    "dhh": 0.15139
+   },
+   "charge_method": "TIP3P water model",
+   "charges_from_force_field": true,
+   "force_field": "TIP3P water (Jorgensen et al., J. Chem. Phys. 79, 926 (1983))",
+   "smiles": "O"
+  },
+  {
+   "name": "NA",
+   "atoms": [
+    {
+     "name": "NA",
+     "element": "Na",
+     "type": "Na_n28",
+     "charge": 1.0,
+     "mass": 22.99,
+     "sigma": 0.24392806902682487,
+     "epsilon": 0.3658460312
+    }
+   ],
+   "bonds": [],
+   "angles": [],
+   "torsions": [],
+   "exclusions_nrexcl": 3,
+   "force_field": "OpenFF Sage 2.3.0 (built-in SMIRNOFF engine)",
+   "charge_method": "Sage library charges",
+   "charges_from_force_field": true,
+   "smiles": "[Na+]"
+  },
+  {
+   "name": "CL",
+   "atoms": [
+    {
+     "name": "CL",
+     "element": "Cl",
+     "type": "Cl_n33",
+     "charge": -1.0,
+     "mass": 35.453,
+     "sigma": 0.44776569573733455,
+     "epsilon": 0.14891274399999999
+    }
+   ],
+   "bonds": [],
+   "angles": [],
+   "torsions": [],
+   "exclusions_nrexcl": 3,
+   "force_field": "OpenFF Sage 2.3.0 (built-in SMIRNOFF engine)",
+   "charge_method": "Sage library charges",
+   "charges_from_force_field": true,
+   "smiles": "[Cl-]"
+  }
+ ],
+ "system": [
+  {
+   "type": "MOL",
+   "count": 1,
+   "atom_offset": 0
+  },
+  {
+   "type": "SOL",
+   "count": 1096,
+   "atom_offset": 7
+  },
+  {
+   "type": "NA",
+   "count": 4,
+   "atom_offset": 3295
+  },
+  {
+   "type": "CL",
+   "count": 3,
+   "atom_offset": 3299
+  }
+ ]
+}

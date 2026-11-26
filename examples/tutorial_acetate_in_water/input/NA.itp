@@ -1,0 +1,7 @@
+[ moleculetype ]
+; name  nrexcl
+NA         3
+
+[ atoms ]
+;   nr  type        resnr residue  atom   cgnr    charge       mass
+     1  Na_n28          1 NA      NA         1   1.000000   22.99000

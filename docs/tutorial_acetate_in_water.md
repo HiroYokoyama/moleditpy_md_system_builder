@@ -16,6 +16,10 @@ the GROMACS input shown was run unchanged.
   Linux workstation). MoleditPy itself can run on Windows, macOS or Linux; the files are
   plain text and can be copied to any machine or cluster.
 
+All the files of this example (the solute, `system.mdff.json`, the GROMACS input and the
+run's results) are in
+[examples/tutorial_acetate_in_water](https://github.com/HiroYokoyama/moleditpy_md_system_builder/tree/main/examples/tutorial_acetate_in_water).
+
 Contents
 
 1. [Draw the solute](#1-draw-the-solute)
