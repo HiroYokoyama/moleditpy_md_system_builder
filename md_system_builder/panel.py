@@ -39,7 +39,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from . import celltools, molio, packing, solvate
+from . import celltools, molio, packing, protein, solvate
 from .cellmeta import PeriodicCell, bounding_box_cell, read_cell, write_cell
 from .host_link import (
     LSV_HOST_LINK_LIMIT,
@@ -88,6 +88,9 @@ def default_settings() -> dict:
         "overlay": True,
         "file_threshold": LSV_HOST_LINK_LIMIT,
         "output_format": "pdb",
+        "histidine": "HIE",
+        "remove_water": True,
+        "remove_other": False,
     }
 
 
@@ -130,6 +133,7 @@ class BuilderPanel(QWidget):
         outer.addWidget(self.cell_label)
 
         self.tabs = QTabWidget()
+        self.tabs.addTab(self._scroll(self._build_protein_tab()), "Protein")
         self.tabs.addTab(self._scroll(self._build_box_tab()), "Box")
         self.tabs.addTab(self._scroll(self._build_pack_tab()), "Pack")
         self.tabs.addTab(self._scroll(self._build_solvate_tab()), "Solvate")
@@ -182,6 +186,84 @@ class BuilderPanel(QWidget):
         area.setWidgetResizable(True)
         area.setWidget(widget)
         return area
+
+    # ------------------------------------------------------------------
+    # Protein tab
+    # ------------------------------------------------------------------
+
+    def _build_protein_tab(self):
+        page = QWidget()
+        layout = QVBoxLayout(page)
+        intro = QLabel(
+            "Prepares a protein opened from a PDB file for MD with the Amber ff14SB "
+            "force field: every hydrogen is rebuilt for pH 7 (Lys, Arg, Asp and Glu "
+            "charged), chain ends are charged (OXT is added when missing), cysteines "
+            "closer than 2.5 A are joined as disulfides and missing heavy atoms are "
+            "added. Run it before Solvate."
+        )
+        intro.setWordWrap(True)
+        layout.addWidget(intro)
+        box = QGroupBox("Options")
+        form = QFormLayout(box)
+        self.histidine_combo = QComboBox()
+        for key, label in (
+            ("HIE", "HIE (H on NE2)"),
+            ("HID", "HID (H on ND1)"),
+            ("HIP", "HIP (both, charged)"),
+        ):
+            self.histidine_combo.addItem(label, key)
+        self.histidine_combo.setToolTip(
+            "Used for histidines without hydrogens in the file; residues named HID, "
+            "HIE or HIP, or with ring hydrogens, keep their state."
+        )
+        form.addRow("Histidine:", self.histidine_combo)
+        self.remove_water_check = QCheckBox("Remove crystal waters")
+        form.addRow(self.remove_water_check)
+        self.remove_other_check = QCheckBox(
+            "Remove other groups (ions, ligands, additives)"
+        )
+        self.remove_other_check.setToolTip(
+            "Kept groups stay as they are: they need hydrogens and parameters of "
+            "their own (Force Field Builder uses Sage for them)."
+        )
+        form.addRow(self.remove_other_check)
+        layout.addWidget(box)
+        run = QPushButton("Prepare Protein")
+        run.clicked.connect(self.run_protein)
+        layout.addWidget(run)
+        self.protein_report = QLabel()
+        self.protein_report.setWordWrap(True)
+        self.protein_report.setTextInteractionFlags(
+            Qt.TextInteractionFlag.TextSelectableByMouse
+        )
+        layout.addWidget(self.protein_report)
+        layout.addStretch(1)
+        return page
+
+    def run_protein(self):
+        mol = self.current_mol()
+        if mol is None or not mol.GetNumAtoms():
+            self.error("Open a protein (PDB file) first.")
+            return
+        try:
+            source = from_rdkit(mol)
+        except ValueError as exc:
+            self.error(str(exc))
+            return
+        histidine = self.histidine_combo.currentData()
+        remove_water = self.remove_water_check.isChecked()
+        remove_other = self.remove_other_check.isChecked()
+        self.protein_report.setText("")
+
+        def job(progress, cancelled):
+            result, report = protein.prepare(
+                source, histidine, remove_water, remove_other
+            )
+            result.note = " ".join(report.lines())
+            result.report_lines = report.lines()
+            return result
+
+        self.start_job("Preparing the protein", job)
 
     # ------------------------------------------------------------------
     # Box tab
@@ -921,6 +1003,9 @@ class BuilderPanel(QWidget):
 
     def _on_finished(self, system):
         self._job_done()
+        lines = getattr(system, "report_lines", None)
+        if lines:
+            self.protein_report.setText("\n".join(lines))
         self.deliver(system, self._job_label)
 
     def _on_failed(self, message):
@@ -1054,6 +1139,9 @@ class BuilderPanel(QWidget):
             "overlay": self.overlay_check.isChecked(),
             "file_threshold": self.threshold_spin.value(),
             "output_format": self.format_combo.currentText(),
+            "histidine": self.histidine_combo.currentData(),
+            "remove_water": self.remove_water_check.isChecked(),
+            "remove_other": self.remove_other_check.isChecked(),
         }
 
     def apply_settings(self, settings):
@@ -1077,6 +1165,11 @@ class BuilderPanel(QWidget):
         index = self.format_combo.findText(str(s["output_format"]))
         if index >= 0:
             self.format_combo.setCurrentIndex(index)
+        index = self.histidine_combo.findData(str(s["histidine"]))
+        if index >= 0:
+            self.histidine_combo.setCurrentIndex(index)
+        self.remove_water_check.setChecked(bool(s["remove_water"]))
+        self.remove_other_check.setChecked(bool(s["remove_other"]))
 
     def shutdown(self):
         self.settings.update(self.read_settings())

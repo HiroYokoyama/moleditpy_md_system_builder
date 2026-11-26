@@ -93,6 +93,7 @@ def test_panel_builds_and_round_trips_settings(qapp):
     ctx = FakeContext()
     panel = BuilderPanel(ctx, CellKeeper(ctx), default_settings())
     assert [panel.tabs.tabText(i) for i in range(panel.tabs.count())] == [
+        "Protein",
         "Box",
         "Pack",
         "Solvate",

@@ -12,7 +12,8 @@ template (protein_templates.py):
 - cysteines whose sulfur atoms are within 2.5 A become CYX with an S-S bond;
 - heavy atoms missing from a residue are added in the template's local geometry and
   reported (check them: the side chain conformation is the template's);
-- crystal waters can be removed; other groups (ions, ligands) are kept as they are.
+- crystal waters can be removed, and so can other groups (ions, ligands, additives);
+  kept groups stay as they are.
 
 Each new atom is placed from its bonded neighbour and two more placed atoms: the
 template's three points are fitted onto the actual ones and the template position of
@@ -91,6 +92,7 @@ class Report:
     disulfides: list[str] = field(default_factory=list)
     breaks: list[str] = field(default_factory=list)
     removed_water: int = 0
+    removed_other: list[str] = field(default_factory=list)
     other_groups: list[str] = field(default_factory=list)
     duplicates: int = 0
     net_charge: int = 0
@@ -129,6 +131,12 @@ class Report:
             )
         if self.removed_water:
             out.append(f"{self.removed_water} water molecules removed.")
+        if self.removed_other:
+            out.append(
+                f"Removed: {', '.join(self.removed_other[:10])}"
+                + (" ..." if len(self.removed_other) > 10 else "")
+                + "."
+            )
         if self.other_groups:
             out.append(
                 f"Kept as they are (need their own hydrogens and parameters): "
@@ -245,7 +253,7 @@ def _distance(a, b):
     return float(np.linalg.norm(np.asarray(a) - np.asarray(b)))
 
 
-def prepare(system, histidine="HIE", remove_water=True):
+def prepare(system, histidine="HIE", remove_water=True, remove_other=False):
     """(new System, Report). Raises ProteinError when a residue cannot be rebuilt."""
     if histidine not in HISTIDINES:
         raise ValueError(f"histidine must be one of {HISTIDINES}")
@@ -439,6 +447,9 @@ def prepare(system, histidine="HIE", remove_water=True):
     for g in others:
         if remove_water and g.resname in WATER_NAMES:
             report.removed_water += 1
+            continue
+        if remove_other and g.resname not in WATER_NAMES:
+            report.removed_other.append(_label(g))
             continue
         if g.resname not in WATER_NAMES:
             report.other_groups.append(_label(g))
