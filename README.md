@@ -4,13 +4,13 @@
 [![GitHub tag](https://img.shields.io/github/v/tag/HiroYokoyama/moleditpy_md_system_builder?label=version)](https://github.com/HiroYokoyama/moleditpy_md_system_builder/tags)
 
 A [MoleditPy](https://github.com/HiroYokoyama/python_molecular_editor) plugin that builds
-periodic systems for molecular dynamics: set the cell, pack molecules into it, solvate
-with water and ions, and edit the cell. It needs nothing beyond what MoleditPy already
+periodic systems for molecular dynamics: prepare a protein from a PDB file, set the cell,
+pack molecules into it, solvate with water and ions, and edit the cell. It needs nothing beyond what MoleditPy already
 installs (numpy, RDKit, PySide6, PyVista).
 
 ![Solvated acetate with counter-ions](https://raw.githubusercontent.com/HiroYokoyama/moleditpy_md_system_builder/main/docs/images/solvate.png)
 
-Open it from **Tools > MD System Builder...**. One dock panel holds four tabs, in the
+Open it from **Tools > MD System Builder...**. One dock panel holds five tabs, in the
 order a system is built.
 
 ## MD calculation prep on MoleditPy
@@ -70,6 +70,8 @@ file.
 
 1. **Draw or open the solute** and convert it to 3D with explicit hydrogens. For a pure
    liquid or a mixture, skip this and add the components in the Pack tab (SMILES or files).
+   For a **protein**, open its PDB file and press **Prepare Protein** in the Protein tab,
+   which adds the hydrogens, disulfide bonds and missing atoms (see [Protein](#protein)).
 2. **Build the system** with MD System Builder:
    - **Solvate**: a box around the solute, TIP3P water, counter-ions to neutralise it and
      salt to a concentration;
@@ -80,8 +82,8 @@ file.
    residue names the next plugins read. Above 2,000 atoms the Large System Viewer offers
    its fast style; check the box and the solvent there.
 3. **Assign the force field**: open Force Field Builder, choose the force field (OpenFF
-   Sage 2.3.0 by default; GAFF / GAFF2 with acpype and AmberTools), the charge method and the water
-   model, and press **Assign Parameters**. Every distinct molecule becomes one molecule
+   Sage 2.3.0 by default; GAFF / GAFF2 with acpype and AmberTools; a protein gets Amber
+   ff14SB by itself), the charge method and the water model, and press **Assign Parameters**. Every distinct molecule becomes one molecule
    type, so 500 waters are a single entry. Check the Warnings tab and save
    `system.mdff.json`.
    - *Ligand charges from QM (optional)*: compute the ligand alone in ORCA, Gaussian,
@@ -104,6 +106,34 @@ The cell travels between the plugins as the `moleditpy_cell` molecule property
 `gmx trjconv -o traj.gro`) to play it in the Large System Viewer, and analyse it with
 [Trajectory Analysis](https://github.com/HiroYokoyama/moleditpy_trajectory_analysis) (Analysis > Trajectory
 Analysis...): RDF, MSD and diffusion, RMSD / RMSF, radius of gyration, density profiles.
+
+## Protein
+
+Prepares a protein opened from a PDB file for MD with Amber ff14SB, which Force Field
+Builder applies to it:
+
+- **Hydrogens for pH 7**: every hydrogen is rebuilt from the residue templates, so a file
+  with hydrogens, with some or with none gives the same result. Lys, Arg, Asp and Glu are
+  charged, and so are the chain ends. Histidines take the state chosen under
+  **Histidine** (HIE, HID or HIP), unless the file already names them HID / HIE / HIP or
+  has their ring hydrogens; residues named ASH, GLH, LYN or CYM keep that state.
+- **Chain ends and breaks**: residues closer than 2.0 A (C to N) are one chain; a gap
+  starts a new chain with charged ends, and the report lists every break. A missing
+  terminal OXT is added.
+- **Disulfides**: cysteines whose sulfurs are closer than 2.5 A are joined (CYX).
+- **Missing heavy atoms** of a residue are added from the template, fitted on the atoms
+  that are there; the report lists them.
+- **Alternate locations**: only the first copy of a duplicated atom is kept.
+- **Water and other groups**: crystal waters are removed by default; ions, ligands and
+  additives are kept unless **Remove other groups** is checked. Kept groups need their own
+  hydrogens, and Force Field Builder gives them Sage parameters.
+
+The report under the button gives the residues, chains, added hydrogens and atoms,
+histidine states, disulfides, breaks, removed groups and the net charge, which Solvate's
+counter-ions then neutralise. The result replaces the current molecule as one undo step.
+
+Only the standard amino acids (and the ACE / NME caps) are prepared; a residue with an
+unknown atom name, or a chain of a single residue, is reported as an error.
 
 ## Box
 
