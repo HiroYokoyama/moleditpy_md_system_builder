@@ -337,6 +337,7 @@ class BuilderPanel(QWidget):
         self.comp_table.setSelectionMode(
             QAbstractItemView.SelectionMode.SingleSelection
         )
+        self.comp_table.setMinimumHeight(140)
         self.comp_table.itemChanged.connect(self._component_edited)
         self.comp_table.itemSelectionChanged.connect(self._load_region)
         layout.addWidget(self.comp_table)
