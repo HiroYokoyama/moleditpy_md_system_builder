@@ -10,7 +10,7 @@ import logging
 import os
 
 PLUGIN_NAME = "MD System Builder"
-PLUGIN_VERSION = "0.1.1"
+PLUGIN_VERSION = "0.2.0"
 PLUGIN_AUTHOR = "HiroYokoyama"
 PLUGIN_DESCRIPTION = (
     "Build periodic MD systems: set the cell, pack molecules (Packmol-like), solvate "

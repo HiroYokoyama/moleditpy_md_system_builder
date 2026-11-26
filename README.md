@@ -132,6 +132,12 @@ The report under the button gives the residues, chains, added hydrogens and atom
 histidine states, disulfides, breaks, removed groups and the net charge, which Solvate's
 counter-ions then neutralise. The result replaces the current molecule as one undo step.
 
+Checked on crambin and protein G (2IGD) with their hydrogens removed: the rebuilt
+hydrogens lie within 0.03 A (median) of the deposited ones, AmberTools tleap reads the
+result with no warnings, and Force Field Builder's topology of it gives the same energies
+as tleap's. A solvated lysozyme (27,936 atoms) prepared this way ran through energy
+minimisation, NVT, NPT and MD in GROMACS.
+
 Only the standard amino acids (and the ACE / NME caps) are prepared; a residue with an
 unknown atom name, or a chain of a single residue, is reported as an error.
 
