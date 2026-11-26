@@ -13,6 +13,73 @@ installs (numpy, RDKit, PySide6, PyVista).
 Open it from **Tools > MD System Builder...**. One dock panel holds four tabs, in the
 order a system is built.
 
+## MD calculation prep on MoleditPy
+
+MD System Builder is the first step of a set of MoleditPy plugins that take a structure
+from a sketch to a running MD simulation and back to its analysis, without leaving the
+editor. Every plugin installs from the Plugin Installer and needs nothing beyond MoleditPy
+itself; the MD engines run outside MoleditPy.
+
+```
+  draw / open a molecule
+          |
+  1 MD System Builder ........ cell, packing, water and ions
+          |
+  2 Force Field Builder ...... parameters and charges  -->  system.mdff.json
+          |                    (optional: QM charges from ORCA, Gaussian, PySCF, xtb ...)
+          |
+  3 GROMACS / LAMMPS / OpenMM input generator  -->  ready-to-run input files
+          |
+     run the MD engine
+          |
+  4 Large System Viewer ...... watch the trajectory
+  5 Trajectory Analysis ...... RDF, MSD, RMSD, density profiles
+```
+
+| Step | Plugin | Menu | What you get |
+|---|---|---|---|
+| 1. Build the system | **MD System Builder** (this plugin) | Tools > MD System Builder... | periodic cell (`moleditpy_cell`), packed or solvated system with ions, residue names |
+| 2. Parameters | [Force Field Builder](https://github.com/HiroYokoyama/moleditpy_force_field_builder) | Tools > Force Field Builder... | OpenFF Sage 2.3.0 (or GAFF / GAFF2 with AmberTools) parameters, charges, TIP3P / SPC/E / OPC3 water, `*.mdff.json` |
+| 3a. GROMACS | [GROMACS Input Generator](https://github.com/HiroYokoyama/moleditpy_gromacs_input_generator) | File > Export > GROMACS Input (.gro/.top/.mdp)... | `conf.gro`, `topol.top` and `.itp`, `em/nvt/npt/md.mdp`, `index.ndx`, `run.sh` / `run.bat` |
+| 3b. LAMMPS | [LAMMPS Input Generator](https://github.com/HiroYokoyama/moleditpy_lammps_input_generator) | File > Export > LAMMPS Input (data + in script)... | data file and `in.*` script (mdff, UFF or ReaxFF) |
+| 3c. OpenMM | [OpenMM Script Generator](https://github.com/HiroYokoyama/moleditpy_openmm_script_generator) | File > Export > OpenMM Script... | `run_<name>.py`, PDB with the box, ForceField XML |
+| 4. View | [Large System Viewer](https://github.com/HiroYokoyama/moleditpy_large_system_viewer) | opens large PDB / GRO / XYZ / SDF files | fast 3D style, ribbons, periodic box, frame playback |
+| 5. Analyse | [Trajectory Analysis](https://github.com/HiroYokoyama/moleditpy_trajectory_analysis) | Analysis > Trajectory Analysis... | RDF, MSD and diffusion, RMSD / RMSF, radius of gyration, density profiles, CSV / PNG |
+
+### Step by step
+
+1. **Draw or open the solute** and convert it to 3D (hydrogens explicit). For a liquid or
+   mixture, add the components to the Pack tab as SMILES or files instead.
+2. **Build the box** here: Solvate for a solute in water with counter-ions and salt, or
+   Pack for mixtures and densities. The result replaces the current molecule as one undo
+   step and carries the cell and residue names the next plugins read. Systems above
+   50,000 atoms are written to a file and opened by the Large System Viewer.
+3. **Assign the force field** with Force Field Builder and press **Assign Parameters**.
+   Water and ions get their model parameters; each distinct molecule becomes one molecule
+   type, so a box of 500 waters is one `.itp`. Save the result as `system.mdff.json`.
+   - *Better charges for a ligand (optional)*: run ORCA, Gaussian, Q-Chem, Psi4, PySCF or
+     xtb on the molecule alone (for example with
+     [ORCA Input Generator Pro](https://github.com/HiroYokoyama/moleditpy_orca_input_generator_pro),
+     [Gaussian Input Generator Pro](https://github.com/HiroYokoyama/moleditpy_gaussian_input_generator_pro) or
+     [PySCF Calculator](https://github.com/HiroYokoyama/moleditpy_pyscf-calculator)) and import the output with
+     **Import Charges...**. One molecule's charges are applied to every copy in the box;
+     ESP-fitted charges are offered first.
+4. **Write the engine input**: open the GROMACS, LAMMPS or OpenMM generator, load
+   `system.mdff.json`, set the run options and check the live preview of every file.
+   **Save files...** writes the input set (for GROMACS with `run.sh` / `run.bat`, for
+   OpenMM a single `run_<name>.py`).
+5. **Run the simulation** with GROMACS, LAMMPS or OpenMM on your machine or cluster.
+6. **Look at the result**: open the trajectory (multi-frame PDB, GRO, XYZ or SDF; for
+   example `gmx trjconv -o traj.gro`) and the Large System Viewer draws it with frame
+   playback and the periodic box.
+7. **Analyse** it with Trajectory Analysis: g(r) and coordination numbers, diffusion
+   coefficients from the MSD, RMSD / RMSF, radius of gyration and density profiles,
+   exported as CSV and PNG.
+
+The cell travels between the plugins as the `moleditpy_cell` molecule property
+(see [below](#the-moleditpy_cell-property)), and the force field as the neutral
+`moleditpy-mdff` JSON, so each step can also be used on its own.
+
 ## Box
 
 Sets the periodic cell of the current molecule from
