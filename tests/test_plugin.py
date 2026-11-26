@@ -26,7 +26,7 @@ def metadata():
 def test_metadata():
     meta = metadata()
     assert meta["PLUGIN_NAME"] == "MD System Builder"
-    assert meta["PLUGIN_VERSION"] == "0.2.0"
+    assert meta["PLUGIN_VERSION"] == "0.2.1"
     assert meta["PLUGIN_AUTHOR"] == "HiroYokoyama"
     assert meta["PLUGIN_CATEGORY"] == "Utility"
     assert meta["PLUGIN_LICENSE"] == "LGPL-3.0-or-later"
