@@ -173,8 +173,8 @@ slider at the bottom.
 ![The last frame of the trajectory in the Large System Viewer](images/tutorial/06_trajectory.png)
 
 **Save GIF...** on the same toolbar writes the frames as an animated GIF. This one is the
-whole 1 ns at one frame every 50 ps (21 frames), saved with High Quality on and an opaque
-background at 6 frames per second:
+whole 1 ns at one frame every 50 ps (21 frames), saved with High Quality and Transparent on
+at 6 frames per second:
 
 ![The 1 ns run, one frame every 50 ps, as an animated GIF](images/water_trajectory.gif)
 
