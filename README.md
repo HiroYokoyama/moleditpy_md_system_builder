@@ -25,6 +25,8 @@ trajectory. Read it on the
 [web page](https://hiroyokoyama.github.io/moleditpy_md_system_builder/docs/tutorial_acetate_in_water.html)
 or [on GitHub](https://github.com/HiroYokoyama/moleditpy_md_system_builder/blob/main/docs/tutorial_acetate_in_water.md).
 
+![The tutorial's GROMACS run: acetate in water, 1 ns with a frame every 50 ps, played in the Large System Viewer](https://raw.githubusercontent.com/HiroYokoyama/moleditpy_md_system_builder/main/docs/images/water_trajectory.gif)
+
 ```
   draw or open the solute
            |
