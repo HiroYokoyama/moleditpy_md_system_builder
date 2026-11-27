@@ -10,7 +10,7 @@ installs (numpy, RDKit, PySide6, PyVista).
 
 ![Solvated acetate with counter-ions](https://raw.githubusercontent.com/HiroYokoyama/moleditpy_md_system_builder/main/docs/images/solvate.png)
 
-Open it from **Tools > MD System Builder...**. One dock panel holds five tabs, in the
+Open it from **MD > MD System Builder...**. One dock panel holds five tabs, in the
 order a system is built.
 
 ## MD calculation prep on MoleditPy
@@ -48,9 +48,9 @@ or [on GitHub](https://github.com/HiroYokoyama/moleditpy_md_system_builder/blob/
 
 | Plugin | Menu | Role |
 |---|---|---|
-| **MD System Builder** (this plugin) | Tools > MD System Builder... | periodic cell, packing, solvation with ions |
+| **MD System Builder** (this plugin) | MD > MD System Builder... | periodic cell, packing, solvation with ions |
 | [Large System Viewer](https://github.com/HiroYokoyama/moleditpy_large_system_viewer) | opens by itself for large structures | displays the built system |
-| [Force Field Builder](https://github.com/HiroYokoyama/moleditpy_force_field_builder) | Tools > Force Field Builder... | force-field parameters and charges (`*.mdff.json`) |
+| [Force Field Builder](https://github.com/HiroYokoyama/moleditpy_force_field_builder) | MD > Force Field Builder... | force-field parameters and charges (`*.mdff.json`) |
 
 **One per MD engine**
 

@@ -10,7 +10,7 @@ import logging
 import os
 
 PLUGIN_NAME = "MD System Builder"
-PLUGIN_VERSION = "0.2.1"
+PLUGIN_VERSION = "0.2.2"
 PLUGIN_AUTHOR = "HiroYokoyama"
 PLUGIN_DESCRIPTION = (
     "Build periodic MD systems: set the cell, pack molecules (Packmol-like), solvate "
@@ -121,7 +121,7 @@ def initialize(context):
     except Exception:
         logger.debug("Ignored error", exc_info=True)
 
-    context.add_menu_action("Tools/MD System Builder...", _show_panel)
+    context.add_menu_action("MD/MD System Builder...", _show_panel)
 
     def save_state():
         data = _keeper.state_for_save()

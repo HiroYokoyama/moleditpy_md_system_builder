@@ -39,7 +39,7 @@ next step and is checked again when the force field is assigned.
 
 ## 2. Solvate it
 
-Open **Tools > MD System Builder...** and choose the **Solvate** tab. The settings used here:
+Open **MD > MD System Builder...** and choose the **Solvate** tab. The settings used here:
 
 | Setting | Value | Why |
 |---|---|---|
@@ -67,7 +67,7 @@ Check the box before going on: the solute should sit inside, with water all arou
 
 ## 3. Assign the force field
 
-Open **Tools > Force Field Builder...**. Keep **OpenFF Sage 2.3.0** (built in, no
+Open **MD > Force Field Builder...**. Keep **OpenFF Sage 2.3.0** (built in, no
 installation needed), the charge method **Force field's own scheme**, the water model
 **TIP3P**, and *Mark bonds to hydrogen as constraints*, then press **Assign Parameters**.
 

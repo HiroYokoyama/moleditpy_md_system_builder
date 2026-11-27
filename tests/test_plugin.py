@@ -26,7 +26,7 @@ def metadata():
 def test_metadata():
     meta = metadata()
     assert meta["PLUGIN_NAME"] == "MD System Builder"
-    assert meta["PLUGIN_VERSION"] == "0.2.1"
+    assert meta["PLUGIN_VERSION"] == "0.2.2"
     assert meta["PLUGIN_AUTHOR"] == "HiroYokoyama"
     assert meta["PLUGIN_CATEGORY"] == "Utility"
     assert meta["PLUGIN_LICENSE"] == "LGPL-3.0-or-later"
@@ -78,7 +78,7 @@ def test_initialize_registers_menu_and_handlers():
 
     ctx = FakeContext()
     plugin.initialize(ctx)
-    assert ctx.menus == ["Tools/MD System Builder..."]
+    assert ctx.menus == ["MD/MD System Builder..."]
     assert set(ctx.handlers) == {"save", "load", "reset"}
     assert ctx.handlers["save"]() == {}
     ctx.handlers["load"]({"cell": "{}", "n_atoms": 3})
